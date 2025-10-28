@@ -1,17 +1,17 @@
-Oct 28, 2025 10:59:23 PM reposense.system.LogsManager addFileHandler
+Oct 28, 2025 11:13:31 PM reposense.system.LogsManager addFileHandler
 INFO: Log temp folder has been successfully created
-Oct 28, 2025 10:59:23 PM reposense.parser.ArgsParser parse
+Oct 28, 2025 11:13:31 PM reposense.parser.ArgsParser parse
 INFO: Config path not provided, using the config folder as default.
-Oct 28, 2025 10:59:23 PM reposense.parser.ReportConfigYamlParser parse
+Oct 28, 2025 11:13:31 PM reposense.parser.ReportConfigYamlParser parse
 INFO: Parsing report-config.yaml file...
-Oct 28, 2025 10:59:23 PM reposense.parser.ArgsParser addReportConfigToBuilder
+Oct 28, 2025 11:13:31 PM reposense.parser.ArgsParser addReportConfigToBuilder
 WARNING: Error parsing report-config.yaml: /home/runner/work/taller-programacion-reports/taller-programacion-reports/config/report-config.yaml (No such file or directory)
 /home/runner/work/taller-programacion-reports/taller-programacion-reports/config/report-config.yaml Ignoring the report config provided.
-Oct 28, 2025 10:59:23 PM reposense.parser.CsvParser validateHeader
+Oct 28, 2025 11:13:31 PM reposense.parser.CsvParser validateHeader
 INFO: Parsed header of CSV file, repo-config.csv, and recognized columns: Ignore Standalone Config,  Repository's Location,  Skip Ignored File Analysis,  Branch,  Shallow Cloning,  File formats,  Ignore Glob List,  Ignore Authors List,  Find Previous Authors,  File Size Limit,  Ignore File Size Limit,  Ignore Commits List
-Oct 28, 2025 10:59:23 PM reposense.parser.CsvParser parse
-WARNING: The provided file format, Consultorio Odontologico, contains illegal characters.
-java.lang.IllegalArgumentException: The provided file format, Consultorio Odontologico, contains illegal characters.
+Oct 28, 2025 11:13:31 PM reposense.parser.CsvParser parse
+WARNING: The provided file format, Consultorio Odontológico, contains illegal characters.
+java.lang.IllegalArgumentException: The provided file format, Consultorio Odontológico, contains illegal characters.
 	at reposense.model.FileType.validateFileFormat(FileType.java:70)
 	at reposense.model.FileType.convertStringFormatToFileType(FileType.java:48)
 	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
@@ -27,10 +27,92 @@ java.lang.IllegalArgumentException: The provided file format, Consultorio Odonto
 	at reposense.model.ConfigRunConfiguration.getRepoConfigurations(ConfigRunConfiguration.java:42)
 	at reposense.RepoSense.main(RepoSense.java:59)
 
-Oct 28, 2025 10:59:23 PM reposense.RepoSense main
-WARNING: No valid configurations in the repo-config.csv.
-reposense.parser.exceptions.InvalidCsvException: No valid configurations in the repo-config.csv.
-	at reposense.parser.CsvParser.parse(CsvParser.java:124)
+Oct 28, 2025 11:13:31 PM reposense.parser.CsvParser parse
+WARNING: The provided file format, Tienda Don Mateo, contains illegal characters.
+java.lang.IllegalArgumentException: The provided file format, Tienda Don Mateo, contains illegal characters.
+	at reposense.model.FileType.validateFileFormat(FileType.java:70)
+	at reposense.model.FileType.convertStringFormatToFileType(FileType.java:48)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at reposense.model.FileType.convertFormatStringsToFileTypes(FileType.java:40)
+	at reposense.parser.RepoConfigCsvParser.processLine(RepoConfigCsvParser.java:119)
+	at reposense.parser.CsvParser.parse(CsvParser.java:108)
 	at reposense.model.ConfigRunConfiguration.getRepoConfigurations(ConfigRunConfiguration.java:42)
 	at reposense.RepoSense.main(RepoSense.java:59)
 
+Oct 28, 2025 11:13:31 PM reposense.parser.CsvParser validateHeader
+INFO: Parsed header of CSV file, author-config.csv, and recognized columns: Author's Emails,  Repository's Location,  Branch,  Author's Git Host ID,  Author's Display Name,  Ignore Glob List,  Author's Git Author Name
+Oct 28, 2025 11:13:31 PM reposense.model.ConfigRunConfiguration getRepoConfigurations
+WARNING: No valid configurations in the author-config.csv.
+reposense.parser.exceptions.InvalidCsvException: No valid configurations in the author-config.csv.
+	at reposense.parser.CsvParser.parse(CsvParser.java:124)
+	at reposense.model.ConfigRunConfiguration.getRepoConfigurations(ConfigRunConfiguration.java:52)
+	at reposense.RepoSense.main(RepoSense.java:59)
+
+Oct 28, 2025 11:13:31 PM reposense.git.GitConfig getGlobalGitLfsConfig
+WARNING: Could not get global git lfs config
+java.lang.RuntimeException: reposense.system.CommandRunnerProcessException: Error returned from command git config --global --list on path . :
+fatal: unable to read config file '/home/runner/.gitconfig': No such file or directory
+
+	at reposense.system.CommandRunner.runCommand(CommandRunner.java:23)
+	at reposense.git.GitConfig.getGitGlobalConfig(GitConfig.java:90)
+	at reposense.git.GitConfig.getGlobalGitLfsConfig(GitConfig.java:44)
+	at reposense.RepoSense.main(RepoSense.java:79)
+Caused by: reposense.system.CommandRunnerProcessException: Error returned from command git config --global --list on path . :
+fatal: unable to read config file '/home/runner/.gitconfig': No such file or directory
+
+	at reposense.system.CommandRunnerProcess.waitForProcess(CommandRunnerProcess.java:46)
+	at reposense.system.CommandRunner.runCommand(CommandRunner.java:21)
+	... 3 more
+
+Oct 28, 2025 11:13:32 PM reposense.report.RepoCloner spawnCloneProcess
+INFO: Cloning in parallel from https://github.com/IgnacioCasula/LaMercedComestiblesSuper.git...
+Oct 28, 2025 11:13:32 PM reposense.report.RepoCloner spawnCloneProcess
+INFO: Cloning in parallel from https://github.com/JorgeRQuiroga/AtleticGYM.git...
+Oct 28, 2025 11:13:32 PM reposense.report.RepoCloner waitForCloneProcess
+INFO: Waiting for cloning of https://github.com/IgnacioCasula/LaMercedComestiblesSuper.git to complete...
+Oct 28, 2025 11:13:32 PM reposense.report.RepoCloner waitForCloneProcess
+INFO: Waiting for cloning of https://github.com/JorgeRQuiroga/AtleticGYM.git to complete...
+Oct 28, 2025 11:13:32 PM reposense.report.RepoCloner waitForCloneProcess
+INFO: Cloning of https://github.com/JorgeRQuiroga/AtleticGYM.git completed!
+Oct 28, 2025 11:13:32 PM reposense.report.ReportGenerator analyzeRepos
+INFO: [1/2] Analyzing https://github.com/JorgeRQuiroga/AtleticGYM.git (main)...
+Oct 28, 2025 11:13:32 PM reposense.report.ReportGenerator updateRepoConfig
+INFO: https://github.com/JorgeRQuiroga/AtleticGYM.git (main) does not contain a standalone config file.
+Oct 28, 2025 11:13:32 PM reposense.report.ReportGenerator updateAuthorList
+INFO: https://github.com/JorgeRQuiroga/AtleticGYM.git (main) has no authors specified, using all authors by default.
+Oct 28, 2025 11:13:32 PM reposense.report.RepoCloner waitForCloneProcess
+INFO: Cloning of https://github.com/IgnacioCasula/LaMercedComestiblesSuper.git completed!
+Oct 28, 2025 11:13:32 PM reposense.authorship.FileInfoExtractor extractTextFileInfos
+INFO: Extracting relevant file info from https://github.com/JorgeRQuiroga/AtleticGYM.git (main)...
+Oct 28, 2025 11:13:32 PM reposense.report.ReportGenerator analyzeRepos
+INFO: [2/2] Analyzing https://github.com/IgnacioCasula/LaMercedComestiblesSuper.git (master)...
+Oct 28, 2025 11:13:32 PM reposense.report.ReportGenerator updateRepoConfig
+INFO: https://github.com/IgnacioCasula/LaMercedComestiblesSuper.git (master) does not contain a standalone config file.
+Oct 28, 2025 11:13:32 PM reposense.report.ReportGenerator updateAuthorList
+INFO: https://github.com/IgnacioCasula/LaMercedComestiblesSuper.git (master) has no authors specified, using all authors by default.
+Oct 28, 2025 11:13:32 PM reposense.model.AuthorConfiguration checkDuplicateAliases
+WARNING: Duplicate alias nata found. The alias will belong to the last author - nata
+Oct 28, 2025 11:13:32 PM reposense.authorship.FileInfoExtractor extractTextFileInfos
+INFO: Extracting relevant file info from https://github.com/IgnacioCasula/LaMercedComestiblesSuper.git (master)...
+Oct 28, 2025 11:13:32 PM reposense.commits.CommitInfoExtractor extractCommitInfos
+INFO: Extracting commits info for https://github.com/JorgeRQuiroga/AtleticGYM.git (main)...
+Oct 28, 2025 11:13:33 PM reposense.commits.CommitInfoAnalyzer analyzeCommits
+INFO: Analyzing commits info for https://github.com/JorgeRQuiroga/AtleticGYM.git (main)...
+Oct 28, 2025 11:13:33 PM reposense.commits.CommitInfoExtractor extractCommitInfos
+INFO: Extracting commits info for https://github.com/IgnacioCasula/LaMercedComestiblesSuper.git (master)...
+Oct 28, 2025 11:13:33 PM reposense.report.ReportGenerator analyzeRepo
+INFO: Analysis of https://github.com/JorgeRQuiroga/AtleticGYM.git (main) completed!
+Oct 28, 2025 11:13:33 PM reposense.commits.CommitInfoAnalyzer analyzeCommits
+INFO: Analyzing commits info for https://github.com/IgnacioCasula/LaMercedComestiblesSuper.git (master)...
+Oct 28, 2025 11:13:33 PM reposense.report.ReportGenerator analyzeRepo
+INFO: Analysis of https://github.com/IgnacioCasula/LaMercedComestiblesSuper.git (master) completed!
+Oct 28, 2025 11:13:33 PM reposense.report.ReportGenerator generateReposReport
+INFO: The report is generated at /home/runner/work/taller-programacion-reports/taller-programacion-reports/reposense-report
+Oct 28, 2025 11:13:33 PM reposense.RepoSense main
+INFO: Elapsed processing time: 1.43 second(s)
