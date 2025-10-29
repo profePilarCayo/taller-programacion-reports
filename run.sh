@@ -1,16 +1,19 @@
-#!/usr/bin/env bash
-set -e
+#!/bin/bash
 
-# Descargar el JAR ( -f = fail si HTTP error, -L = seguir redirects )
-curl -fL https://reposense.org/RepoSense.jar -o RepoSense.jar
+# Downloads a specific version of RepoSense.jar of your choice from our repository
+## Examples of supported options:
+### ./get-reposense.py --release               # Gets the latest release (Stable)
+### ./get-reposense.py --master                # Gets the latest master (Beta)
+### ./get-reposense.py --tag v1.6.1            # Gets a specific version
+### ./get-reposense.py --latest v1.6           # Gets the latest version with the given tag prefix e.g. v1.6.1
+### ./get-reposense.py --commit abc123         # Gets a specific commit
+### ./get-reposense.py --release --overwrite   # Overwrite RepoSense.jar, if exists, with the latest release
 
-# Verificación rápida (debería ser ~60-70 MB, no 9 KB)
-ls -lh RepoSense.jar
+./get-reposense.py --release
 
-# Ejecutar RepoSense con tu CSV y salida en /docs para GitHub Pages
-java -jar RepoSense.jar \
-  --repos-file repo-config.csv \
-  --since "01-01-2025" \
-  --until "today" \
-  --timezone -3 \
-  --output docs
+# Executes RepoSense
+# Do not change the default output folder name (reposense-report)
+## Examples of other valid options; For more, please view the user guide
+### java -jar RepoSense.jar --repos https://github.com/reposense/RepoSense.git
+
+java -jar RepoSense.jar
