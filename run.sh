@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 # Downloads a specific version of RepoSense.jar of your choice from our repository
 ## Examples of supported options:
 ### ./get-reposense.py --release               # Gets the latest release (Stable)
@@ -17,3 +17,5 @@
 ### java -jar RepoSense.jar --repos https://github.com/reposense/RepoSense.git
 
 java -jar RepoSense.jar
+  --repos-file repo-config.csv \
+  --output docs
