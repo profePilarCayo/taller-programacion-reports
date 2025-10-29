@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 # Downloads a specific version of RepoSense.jar of your choice from our repository
 ## Examples of supported options:
 ### ./get-reposense.py --release               # Gets the latest release (Stable)
@@ -18,5 +18,5 @@ set -e
 
 java -jar RepoSense.jar \
   --repos-file repo-config.csv \
-  --output docs \
+  --output reposense-report \
   --timezone -3
