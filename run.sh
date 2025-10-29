@@ -1,19 +1,29 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
 
-# Downloads a specific version of RepoSense.jar of your choice from our repository
-## Examples of supported options:
-### ./get-reposense.py --release               # Gets the latest release (Stable)
-### ./get-reposense.py --master                # Gets the latest master (Beta)
-### ./get-reposense.py --tag v1.6.1            # Gets a specific version
-### ./get-reposense.py --latest v1.6           # Gets the latest version with the given tag prefix e.g. v1.6.1
-### ./get-reposense.py --commit abc123         # Gets a specific commit
-### ./get-reposense.py --release --overwrite   # Overwrite RepoSense.jar, if exists, with the latest release
+# 1) Descarga del jar (deja esto tal cual)
+REPOSENSE_VERSION="latest"
+curl -L -o RepoSense.jar "https://reposense.org/RepoSense.jar"
 
-./get-reposense.py --release
+# 2) Archivos de configuración (usa tus CSV)
+REPOS_FILE="repo-config.csv"           # <- el que ya editaste
+AUTHOR_CONFIG="author-config.csv"      # <- opcional (podés dejarlo vacío si no lo usás)
+GROUP_CONFIG="group-config.csv"        # <- opcional
 
-# Executes RepoSense
-# Do not change the default output folder name (reposense-report)
-## Examples of other valid options; For more, please view the user guide
-### java -jar RepoSense.jar --repos https://github.com/reposense/RepoSense.git
+# 3) Salida donde GitHub Pages publicará el reporte
+OUTPUT_DIR="docs"                      # <- importante para Pages
 
-java -jar RepoSense.jar
+# 4) Parámetros útiles (ajustá si querés)
+SINCE="01-01-2025"                     # o "since 4 months ago"
+UNTIL="today"
+TIMEZONE="-3"                          # Argentina
+
+# 5) Ejecución (usa solo lo que tengas)
+java -jar RepoSense.jar \
+  --repos-file "${REPOS_FILE}" \
+  --author-config-file "${AUTHOR_CONFIG}" \
+  --group-config-file "${GROUP_CONFIG}" \
+  --since "${SINCE}" --until "${UNTIL}" \
+  --timezone "${TIMEZONE}" \
+  --output "${OUTPUT_DIR}"
+
