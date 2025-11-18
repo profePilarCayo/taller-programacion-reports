@@ -1,31 +1,23 @@
-name: RepoSense - Proyectos Taller
+name: RepoSense - Informe Proyectos Taller
 
 on:
-  workflow_dispatch:      # Para ejecutarlo a mano
-  push:
-    branches: [ "main" ]  # Cambiá a "master" si tu rama principal se llama master
+  workflow_dispatch:        # Lo ejecutás a mano desde Actions
+  # Si querés que se dispare solo cuando hay cambios en este repo central:
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
-  reposense:
+  deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write        # necesario para publicar en gh-pages
 
     steps:
-      - name: Checkout (dummy, requerido por Actions)
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Run RepoSense para todos los repos
+      - name: Ejecutar RepoSense
         uses: reposense/reposense-action@v1
         with:
-          repos: |
-            https://github.com/miguelciotta013/proyecto_02.git
-            https://github.com/Gime26/FinalTika.git
-            https://github.com/maxiguaymas/GestionEmpleados-NE.git
-            https://github.com/JULFABOR/PUERTO_REAL.git
-            https://github.com/IgnacioCasula/LaMercedComestiblesSuper.git
-            https://github.com/Ezze-F/MiTiendaMateo.git
-            https://github.com/JorgeRQuiroga/AtleticGYM.git
-          output_dir: ./reposense-report
-          since: "2024-01-01"
-          formats: "html"
+          token: ${{ secrets.GITHUB_TOKEN }}   # obligatorio
+          configDirectory: 'configs'           # carpeta donde pusimos repo-config.csv
+          service: 'gh-pages'                  # publica el reporte en GitHub Pages
+          cliArgs: '--since 2024-01-01'        # opcional: desde qué fecha analizar
