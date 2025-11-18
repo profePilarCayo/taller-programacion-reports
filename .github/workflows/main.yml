@@ -14,7 +14,7 @@ jobs:
       contents: write
 
     steps:
-      # 1. Checkout del Repositorio (Clona tu repo, haciendo que /config sea accesible)
+      # 1. Checkout (Necesario para que el runner acceda a /config)
       - name: Checkout del Repositorio
         uses: actions/checkout@v4
 
@@ -23,7 +23,9 @@ jobs:
         uses: reposense/reposense-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # 🎯 RUTA ABSOLUTA: Fuerza a RepoSense a buscar en la raíz de tu repo
-          configDirectory: '${{ github.workspace }}/config' 
+          # 🎯 Ruta relativa a la carpeta 'config' desde la raíz
+          configDirectory: 'config' 
           service: 'gh-pages'
           cliArgs: '--since 2024-01-01'
+          # 💡 Ejecuta la acción desde la raíz del repositorio
+          working-directory: ${{ github.workspace }}
