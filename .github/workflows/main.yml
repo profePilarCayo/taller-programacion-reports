@@ -14,15 +14,17 @@ jobs:
       contents: write
 
     steps:
-      # 1. PASO NUEVO: Clonar el repositorio actual
+      # 1. Checkout del Repositorio (¡ESTE PASO ESTÁ BIEN!)
       - name: Checkout del Repositorio
-        uses: actions/checkout@v4 # Usa una versión reciente
+        uses: actions/checkout@v4
 
-      # 2. Ejecutar RepoSense (ahora con el archivo de configuración disponible)
+      # 2. Ejecutar RepoSense (MODIFICAR configDirectory)
       - name: Ejecutar RepoSense
         uses: reposense/reposense-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          configDirectory: 'configs'
+          # 🚨 CAMBIO CLAVE: Especificar la ruta completa a la carpeta 'configs'
+          # Esto asegura que RepoSense la encuentre en tu repositorio clonado.
+          configDirectory: '${{ github.workspace }}/configs' 
           service: 'gh-pages'
           cliArgs: '--since 2024-01-01'
