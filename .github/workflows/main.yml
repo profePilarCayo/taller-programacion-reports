@@ -11,13 +11,18 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write        # necesario para publicar en gh-pages
+      contents: write
 
     steps:
+      # 1. PASO NUEVO: Clonar el repositorio actual
+      - name: Checkout del Repositorio
+        uses: actions/checkout@v4 # Usa una versión reciente
+
+      # 2. Ejecutar RepoSense (ahora con el archivo de configuración disponible)
       - name: Ejecutar RepoSense
         uses: reposense/reposense-action@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}   # obligatorio
-          configDirectory: 'configs'           # carpeta donde pusimos repo-config.csv
-          service: 'gh-pages'                  # publica el reporte en GitHub Pages
-          cliArgs: '--since 2024-01-01'        # opcional: desde qué fecha analizar
+          token: ${{ secrets.GITHUB_TOKEN }}
+          configDirectory: 'configs'
+          service: 'gh-pages'
+          cliArgs: '--since 2024-01-01'
