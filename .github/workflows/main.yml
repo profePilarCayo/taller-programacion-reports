@@ -14,17 +14,16 @@ jobs:
       contents: write
 
     steps:
-      # 1. Checkout del Repositorio (¡ESTE PASO ESTÁ BIEN!)
+      # 1. Checkout del Repositorio (Clona tu repo, haciendo que /config sea accesible)
       - name: Checkout del Repositorio
         uses: actions/checkout@v4
 
-      # 2. Ejecutar RepoSense (MODIFICAR configDirectory)
+      # 2. Ejecutar RepoSense
       - name: Ejecutar RepoSense
         uses: reposense/reposense-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # 🚨 CAMBIO CLAVE: Especificar la ruta completa a la carpeta 'configs'
-          # Esto asegura que RepoSense la encuentre en tu repositorio clonado.
-          configDirectory: '${{ github.workspace }}/configs' 
+          # 🎯 RUTA ABSOLUTA: Fuerza a RepoSense a buscar en la raíz de tu repo
+          configDirectory: '${{ github.workspace }}/config' 
           service: 'gh-pages'
           cliArgs: '--since 2024-01-01'
